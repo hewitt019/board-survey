@@ -463,6 +463,19 @@
   }
 
 </style>
+<script>
+  function checkAccess() {
+    const val = document.getElementById('accessInput').value.trim().toLowerCase();
+    if (val === 'buttonwood') {
+      var screen = document.getElementById('accessScreen');
+      if (screen) screen.remove();
+    } else {
+      document.getElementById('accessError').style.display = 'block';
+      document.getElementById('accessInput').value = '';
+      document.getElementById('accessInput').focus();
+    }
+  }
+</script>
 </head>
 <body>
 
@@ -482,6 +495,14 @@
     </div>
   </div>
 </div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var input = document.getElementById('accessInput');
+    if (input) input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') checkAccess();
+    });
+  });
+</script>
 
 <header class="site-header">
   <div class="header-inner">
@@ -1124,22 +1145,6 @@
 </div>
 
 <script>
-
-  // Access code check
-  function checkAccess() {
-    const val = document.getElementById('accessInput').value.trim();
-    if (val === 'Buttonwood') {
-      document.getElementById('accessScreen').style.display = 'none';
-    } else {
-      document.getElementById('accessError').style.display = 'block';
-      document.getElementById('accessInput').value = '';
-      document.getElementById('accessInput').focus();
-    }
-  }
-
-  document.getElementById('accessInput').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') checkAccess();
-  });
 
   // Wake up Supabase if it has gone idle
   const SUPABASE_URL = 'https://pqgmnuwfgdbcondjphry.supabase.co';
