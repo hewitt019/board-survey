@@ -1011,6 +1011,24 @@
 </div>
 
 <script>
+  // Wake up Supabase if it has gone idle
+  const SUPABASE_URL = 'https://pqgmnuwfgdbcondjphry.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_7-6RwgU8E3DhbxnDyYXtBg_7CDepUff';
+
+  async function wakeUpDatabase() {
+    try {
+      await fetch(`${SUPABASE_URL}/rest/v1/board_responses?select=id&limit=1`, {
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`
+        }
+      });
+    } catch (e) {
+      // Silent fail — just a wake-up ping
+    }
+  }
+  wakeUpDatabase();
+
   // Progress tracking
   const ratingNames = [
     'a1','a2','a3','a4','a5','a6',
