@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pennock Pines Board Assessment 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: #ffffff;
+    color: #111111;
+    min-height: 100vh;
+  }
+
+  /* Decorative header */
+  .site-header {
+    background: #1c2e1e;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.02) 40px,
+      rgba(255,255,255,0.02) 80px
+    );
+  }
+  .header-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 52px 32px 44px;
+    position: relative;
+    text-align: center;
+  }
+  .header-rule {
+    width: 60px;
+    height: 2px;
+    background: #b8933a;
+    margin: 0 auto 24px;
+  }
+  .org-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(11px, 2vw, 13px);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #d4aa55;
+    margin-bottom: 14px;
+  }
+  .survey-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 5vw, 38px);
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  .survey-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(14px, 2.5vw, 17px);
+    color: #c8d8c4;
+    margin-bottom: 28px;
+  }
+  .header-rule-bottom {
+    width: 40px;
+    height: 1px;
+    background: #5a7a5c;
+    margin: 0 auto;
+  }
+
+  /* Progress */
+  .progress-bar-wrap {
+    background: #2d4a30;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .progress-track {
+    height: 3px;
+    background: rgba(255,255,255,0.15);
+  }
+  .progress-fill {
+    height: 100%;
+    background: #b8933a;
+    transition: width 0.5s ease;
+    width: 0%;
+  }
+  .progress-label {
+    text-align: center;
+    padding: 10px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c8d8c4;
+  }
+
+  /* Layout */
+  .survey-wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+    background: #ffffff;
+  }
+
+  /* Intro card */
+  .intro-card {
+    background: #f2f7f2;
+    border-left: 3px solid #b8933a;
+    padding: 28px 32px;
+    margin: 36px 0 44px;
+    font-size: 15px;
+    line-height: 1.75;
+    color: #111111;
+  }
+  .intro-card p { margin-bottom: 12px; }
+  .intro-card p:last-child { margin-bottom: 0; }
+  .intro-card ul { padding-left: 20px; margin: 8px 0; }
+  .intro-card li { margin-bottom: 6px; color: #111111; }
+
+  /* Section */
+  .section-block {
+    background: #ffffff;
+    margin-bottom: 56px;
+    animation: fadeUp 0.5s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 6px;
+  }
+  .section-letter {
+    width: 40px;
+    height: 40px;
+    background: #1c2e1e;
+    color: #d4aa55;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(17px, 3vw, 21px);
+    font-weight: 600;
+    color: #1c2e1e;
+  }
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(to right, #2d4a30, transparent);
+    margin-bottom: 28px;
+  }
+  .scale-legend {
+    font-size: 13px;
+    color: #111111;
+    font-style: italic;
+    margin-bottom: 24px;
+    padding: 10px 16px;
+    background: #f2f7f2;
+    border-left: 2px solid #5a7a5c;
+  }
+
+  /* Question */
+  .question-block {
+    margin-bottom: 28px;
+    padding: 20px;
+    background: #f9faf9;
+    border: 1px solid #dde8dd;
+  }
+  .question-text {
+    font-size: 15px;
+    line-height: 1.65;
+    margin-bottom: 14px;
+    color: #111111;
+    font-weight: 400;
+  }
+  .question-num {
+    font-weight: 600;
+    color: #2d4a30;
+    margin-right: 4px;
+  }
+
+  /* Rating scale */
+  .rating-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .rating-option {
+    flex: 1;
+    min-width: 44px;
+    max-width: 90px;
+  }
+  .rating-option input[type="radio"] { display: none; }
+  .rating-option label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 10px 4px;
+    border: 1.5px solid #aac4aa;
+    background: #ffffff;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    font-size: 18px;
+    font-weight: 600;
+    color: #111111;
+    user-select: none;
+  }
+  .rating-option label .scale-word {
+    font-size: 9px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #333333;
+    text-align: center;
+    line-height: 1.2;
+  }
+  .rating-option input:checked + label {
+    background: #1c2e1e;
+    border-color: #1c2e1e;
+    color: #ffffff;
+  }
+  .rating-option input:checked + label .scale-word {
+    color: #c8d8c4;
+  }
+  .rating-option label:hover {
+    border-color: #2d4a30;
+    background: #eaf2ea;
+  }
+  .rating-option input:checked + label:hover {
+    background: #2d4a30;
+  }
+
+  /* Text areas */
+  .open-question {
+    width: 100%;
+    min-height: 100px;
+    padding: 14px 16px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #111111;
+    background: #ffffff;
+    border: 1.5px solid #aac4aa;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .open-question:focus {
+    border-color: #2d4a30;
+  }
+
+  /* Submit */
+  .submit-section {
+    text-align: center;
+    padding: 40px 0;
+    border-top: 1px solid #dde8dd;
+    margin-top: 20px;
+  }
+  .submit-note {
+    font-size: 13px;
+    color: #333333;
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+  .submit-btn {
+    display: inline-block;
+    padding: 16px 56px;
+    background: #1c2e1e;
+    color: #ffffff;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .submit-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: #b8933a;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+  .submit-btn:hover { background: #2d4a30; }
+  .submit-btn:hover::after { transform: scaleX(1); }
+
+  /* Thank you screen */
+  .thankyou-screen {
+    display: none;
+    text-align: center;
+    padding: 80px 20px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .thankyou-icon {
+    width: 64px;
+    height: 64px;
+    background: #1c2e1e;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 28px;
+    font-size: 28px;
+    color: #ffffff;
+  }
+  .thankyou-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    color: #1c2e1e;
+    margin-bottom: 14px;
+  }
+  .thankyou-text {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #111111;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  /* Validation */
+  .question-block.error {
+    border-color: #c0392b;
+  }
+  .question-block.error .rating-row {
+    outline: 2px solid #c0392b;
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+  .question-block.error .open-question {
+    border-color: #c0392b;
+  }
+  .error-msg {
+    font-size: 12px;
+    color: #c0392b;
+    margin-top: 6px;
+    display: none;
+  }
+  .question-block.error .error-msg { display: block; }
+
+  @media (max-width: 500px) {
+    .rating-option label { font-size: 15px; padding: 8px 2px; }
+    .intro-card { padding: 20px; }
+    .question-block { padding: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-rule"></div>
+    <div class="org-name">Pennock Pines, Inc.</div>
+    <h1 class="survey-title">Board &amp; Officer<br>Self-Evaluation</h1>
+    <p class="survey-subtitle">A Tool for Improving Governance Practice</p>
+    <div class="header-rule-bottom"></div>
+  </div>
+</header>
+
+<div class="progress-bar-wrap">
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label" id="progressLabel">0% Complete</div>
+</div>
+
+<div class="survey-wrap">
+
+  <div class="intro-card">
+    <p>The purpose of this self-assessment is to:</p>
+    <ul>
+      <li>Provide honest feedback to the Directors and Officers regarding the functioning of the Board</li>
+      <li>Facilitate an internal discussion with the goal of identifying any weaknesses in Board processes</li>
+      <li>Improve the performance of the Board</li>
+    </ul>
+    <p style="margin-top:14px;"><strong>Individual responses will be anonymous.</strong> The responses will be collected by the Governance Committee and the data reported back to the Board to be reviewed and discussed.</p>
+  </div>
+
+  <form id="surveyForm" novalidate>
+
+    <!-- SECTION A -->
+    <div class="section-block" style="animation-delay:0.1s">
+      <div class="section-header">
+        <div class="section-letter">A</div>
+        <h2 class="section-title">How Well Has the Board Done Its Job?</h2>
+      </div>
+      <div class="section-divider"></div>
+      <div class="scale-legend">Rating scale — (1) Strongly Disagree &nbsp;·&nbsp; (2) Disagree &nbsp;·&nbsp; (3) Neutral &nbsp;·&nbsp; (4) Agree &nbsp;·&nbsp; (5) Strongly Agree</div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">1.</span> Our organization has a three to five-year strategic plan.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="a1" id="a1_1" value="1"><label for="a1_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="a1" id="a1_2" value="2"><label for="a1_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="a1" id="a1_3" value="3"><label for="a1_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="a1" id="a1_4" value="4"><label for="a1_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="a1" id="a1_5" value="5"><label for="a1_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">2.</span> The board's meeting agendas clearly reflect our strategic plan.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="a2" id="a2_1" value="1"><label for="a2_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="a2" id="a2_2" value="2"><label for="a2_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="a2" id="a2_3" value="3"><label for="a2_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="a2" id="a2_4" value="4"><label for="a2_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="a2" id="a2_5" value="5"><label for="a2_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">3.</span> Our organization has a one-year operational plan.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="a3" id="a3_1" value="1"><label for="a3_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="a3" id="a3_2" value="2"><label for="a3_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="a3" id="a3_3" value="3"><label for="a3_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="a3" id="a3_4" value="4"><label for="a3_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="a3" id="a3_5" value="5"><label for="a3_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">4.</span> The board provides direction on how to achieve the goals.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="a4" id="a4_1" value="1"><label for="a4_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="a4" id="a4_2" value="2"><label for="a4_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="a4" id="a4_3" value="3"><label for="a4_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="a4" id="a4_4" value="4"><label for="a4_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="a4" id="a4_5" value="5"><label for="a4_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">5.</span> The board ensures that the organization's accomplishments and challenges are communicated by the board to family members.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="a5" id="a5_1" value="1"><label for="a5_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="a5" id="a5_2" value="2"><label for="a5_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="a5" id="a5_3" value="3"><label for="a5_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="a5" id="a5_4" value="4"><label for="a5_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="a5" id="a5_5" value="5"><label for="a5_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">6.</span> The board ensures that family members have received reports on how our organization has used its financial and other resources.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="a6" id="a6_1" value="1"><label for="a6_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="a6" id="a6_2" value="2"><label for="a6_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="a6" id="a6_3" value="3"><label for="a6_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="a6" id="a6_4" value="4"><label for="a6_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="a6" id="a6_5" value="5"><label for="a6_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block">
+        <p class="question-text"><span class="question-num">7.</span> If you could do one thing to improve the performance of the board, what would it be?</p>
+        <textarea class="open-question" name="a7" placeholder="Your response…"></textarea>
+      </div>
+
+      <div class="question-block">
+        <p class="question-text"><span class="question-num">8.</span> Additional Comments:</p>
+        <textarea class="open-question" name="a8" placeholder="Your response…"></textarea>
+      </div>
+    </div>
+
+    <!-- SECTION B -->
+    <div class="section-block" style="animation-delay:0.2s">
+      <div class="section-header">
+        <div class="section-letter">B</div>
+        <h2 class="section-title">How Well Has the Board Conducted Itself?</h2>
+      </div>
+      <div class="section-divider"></div>
+      <div class="scale-legend">Rating scale — (1) Strongly Disagree &nbsp;·&nbsp; (2) Disagree &nbsp;·&nbsp; (3) Neutral &nbsp;·&nbsp; (4) Agree &nbsp;·&nbsp; (5) Strongly Agree</div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">1.</span> Directors are aware of what is expected of them.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="b1" id="b1_1" value="1"><label for="b1_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b1" id="b1_2" value="2"><label for="b1_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b1" id="b1_3" value="3"><label for="b1_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="b1" id="b1_4" value="4"><label for="b1_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b1" id="b1_5" value="5"><label for="b1_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">2.</span> The agenda of each board meeting is well planned so that we are able to get through all necessary board business.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="b2" id="b2_1" value="1"><label for="b2_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b2" id="b2_2" value="2"><label for="b2_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b2" id="b2_3" value="3"><label for="b2_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="b2" id="b2_4" value="4"><label for="b2_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b2" id="b2_5" value="5"><label for="b2_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">3.</span> Directors receive agendas and written reports sufficiently in advance of our meetings.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="b3" id="b3_1" value="1"><label for="b3_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b3" id="b3_2" value="2"><label for="b3_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b3" id="b3_3" value="3"><label for="b3_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="b3" id="b3_4" value="4"><label for="b3_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b3" id="b3_5" value="5"><label for="b3_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">4.</span> Directors come to meetings prepared.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="b4" id="b4_1" value="1"><label for="b4_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b4" id="b4_2" value="2"><label for="b4_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b4" id="b4_3" value="3"><label for="b4_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="b4" id="b4_4" value="4"><label for="b4_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b4" id="b4_5" value="5"><label for="b4_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">5.</span> All directors participate in important board discussions.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="b5" id="b5_1" value="1"><label for="b5_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b5" id="b5_2" value="2"><label for="b5_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b5" id="b5_3" value="3"><label for="b5_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="b5" id="b5_4" value="4"><label for="b5_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b5" id="b5_5" value="5"><label for="b5_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">6.</span> We do a good job encouraging and dealing with different points of view.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="b6" id="b6_1" value="1"><label for="b6_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b6" id="b6_2" value="2"><label for="b6_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b6" id="b6_3" value="3"><label for="b6_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="b6" id="b6_4" value="4"><label for="b6_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b6" id="b6_5" value="5"><label for="b6_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">7.</span> We all support the decisions we make.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="b7" id="b7_1" value="1"><label for="b7_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b7" id="b7_2" value="2"><label for="b7_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b7" id="b7_3" value="3"><label for="b7_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="b7" id="b7_4" value="4"><label for="b7_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b7" id="b7_5" value="5"><label for="b7_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">8.</span> The board has taken responsibility for recruiting new directors and officers.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="b8" id="b8_1" value="1"><label for="b8_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b8" id="b8_2" value="2"><label for="b8_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b8" id="b8_3" value="3"><label for="b8_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="b8" id="b8_4" value="4"><label for="b8_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b8" id="b8_5" value="5"><label for="b8_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">9.</span> The board has planned and led the orientation process for new directors and officers.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="b9" id="b9_1" value="1"><label for="b9_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b9" id="b9_2" value="2"><label for="b9_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b9" id="b9_3" value="3"><label for="b9_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="b9" id="b9_4" value="4"><label for="b9_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b9" id="b9_5" value="5"><label for="b9_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">10.</span> The board has a plan for director and officer education and further board development.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="b10" id="b10_1" value="1"><label for="b10_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b10" id="b10_2" value="2"><label for="b10_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b10" id="b10_3" value="3"><label for="b10_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="b10" id="b10_4" value="4"><label for="b10_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b10" id="b10_5" value="5"><label for="b10_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">11.</span> Our board meetings are focused on making important decisions, while leaving extraneous matters to committees.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="b11" id="b11_1" value="1"><label for="b11_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b11" id="b11_2" value="2"><label for="b11_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b11" id="b11_3" value="3"><label for="b11_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="b11" id="b11_4" value="4"><label for="b11_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="b11" id="b11_5" value="5"><label for="b11_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block">
+        <p class="question-text"><span class="question-num">12.</span> As a Director or Officer, what is the biggest challenge you face in your role and what is one change that could be made to address this challenge?</p>
+        <textarea class="open-question" name="b12" placeholder="Your response…"></textarea>
+      </div>
+
+      <div class="question-block">
+        <p class="question-text"><span class="question-num">13.</span> Additional Comments:</p>
+        <textarea class="open-question" name="b13" placeholder="Your response…"></textarea>
+      </div>
+    </div>
+
+    <!-- SECTION C -->
+    <div class="section-block" style="animation-delay:0.3s">
+      <div class="section-header">
+        <div class="section-letter">C</div>
+        <h2 class="section-title">Performance of Individual Board Members</h2>
+      </div>
+      <div class="section-divider"></div>
+      <div class="scale-legend">Rating scale — (1) Strongly Disagree &nbsp;·&nbsp; (2) Disagree &nbsp;·&nbsp; (3) Neutral &nbsp;·&nbsp; (4) Agree &nbsp;·&nbsp; (5) Strongly Agree</div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">1.</span> I am aware of what is expected of me as a board member.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="c1" id="c1_1" value="1"><label for="c1_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c1" id="c1_2" value="2"><label for="c1_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c1" id="c1_3" value="3"><label for="c1_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="c1" id="c1_4" value="4"><label for="c1_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c1" id="c1_5" value="5"><label for="c1_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">2.</span> I have adequate time to read the minutes, reports and other materials in advance of our board meetings.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="c2" id="c2_1" value="1"><label for="c2_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c2" id="c2_2" value="2"><label for="c2_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c2" id="c2_3" value="3"><label for="c2_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="c2" id="c2_4" value="4"><label for="c2_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c2" id="c2_5" value="5"><label for="c2_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">3.</span> I am familiar with Pennock Pines, Inc.'s by-laws and governing practices.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="c3" id="c3_1" value="1"><label for="c3_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c3" id="c3_2" value="2"><label for="c3_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c3" id="c3_3" value="3"><label for="c3_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="c3" id="c3_4" value="4"><label for="c3_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c3" id="c3_5" value="5"><label for="c3_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">4.</span> I frequently encourage other board members to express their opinions at board meetings.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="c4" id="c4_1" value="1"><label for="c4_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c4" id="c4_2" value="2"><label for="c4_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c4" id="c4_3" value="3"><label for="c4_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="c4" id="c4_4" value="4"><label for="c4_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c4" id="c4_5" value="5"><label for="c4_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">5.</span> I am encouraged by other board members to express my opinions at board meetings.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="c5" id="c5_1" value="1"><label for="c5_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c5" id="c5_2" value="2"><label for="c5_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c5" id="c5_3" value="3"><label for="c5_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="c5" id="c5_4" value="4"><label for="c5_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c5" id="c5_5" value="5"><label for="c5_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">6.</span> I am a good listener at board meetings.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="c6" id="c6_1" value="1"><label for="c6_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c6" id="c6_2" value="2"><label for="c6_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c6" id="c6_3" value="3"><label for="c6_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="c6" id="c6_4" value="4"><label for="c6_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c6" id="c6_5" value="5"><label for="c6_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">7.</span> I follow through on things I have committed to doing.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="c7" id="c7_1" value="1"><label for="c7_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c7" id="c7_2" value="2"><label for="c7_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c7" id="c7_3" value="3"><label for="c7_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="c7" id="c7_4" value="4"><label for="c7_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c7" id="c7_5" value="5"><label for="c7_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">8.</span> I maintain the confidentiality of all board discussions.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="c8" id="c8_1" value="1"><label for="c8_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c8" id="c8_2" value="2"><label for="c8_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c8" id="c8_3" value="3"><label for="c8_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="c8" id="c8_4" value="4"><label for="c8_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c8" id="c8_5" value="5"><label for="c8_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">9.</span> I reach out to other family members to get their thoughts on major issues or topics the board is discussing.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="c9" id="c9_1" value="1"><label for="c9_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c9" id="c9_2" value="2"><label for="c9_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c9" id="c9_3" value="3"><label for="c9_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="c9" id="c9_4" value="4"><label for="c9_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c9" id="c9_5" value="5"><label for="c9_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">10.</span> When I have a different opinion than the majority, I raise it.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="c10" id="c10_1" value="1"><label for="c10_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c10" id="c10_2" value="2"><label for="c10_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c10" id="c10_3" value="3"><label for="c10_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="c10" id="c10_4" value="4"><label for="c10_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c10" id="c10_5" value="5"><label for="c10_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">11.</span> I support board decisions once they are made even if I do not agree with them.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="c11" id="c11_1" value="1"><label for="c11_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c11" id="c11_2" value="2"><label for="c11_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c11" id="c11_3" value="3"><label for="c11_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="c11" id="c11_4" value="4"><label for="c11_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c11" id="c11_5" value="5"><label for="c11_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">12.</span> I positively promote the work of Pennock Pines, Inc. in the Pines Community whenever I have a chance to do so.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="c12" id="c12_1" value="1"><label for="c12_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c12" id="c12_2" value="2"><label for="c12_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c12" id="c12_3" value="3"><label for="c12_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="c12" id="c12_4" value="4"><label for="c12_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c12" id="c12_5" value="5"><label for="c12_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">13.</span> I follow through on concerns and issues brought to my attention by family members.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="c13" id="c13_1" value="1"><label for="c13_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c13" id="c13_2" value="2"><label for="c13_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c13" id="c13_3" value="3"><label for="c13_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="c13" id="c13_4" value="4"><label for="c13_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="c13" id="c13_5" value="5"><label for="c13_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block">
+        <p class="question-text"><span class="question-num">14.</span> If you were discussing the board with a prospective board member, what is the first thing that comes to mind about your experience as a board member (one positive, one negative, and which comes to mind first)?</p>
+        <textarea class="open-question" name="c14" placeholder="Your response…"></textarea>
+      </div>
+
+      <div class="question-block">
+        <p class="question-text"><span class="question-num">15.</span> Additional Comments:</p>
+        <textarea class="open-question" name="c15" placeholder="Your response…"></textarea>
+      </div>
+    </div>
+
+    <!-- SECTION D -->
+    <div class="section-block" style="animation-delay:0.4s">
+      <div class="section-header">
+        <div class="section-letter">D</div>
+        <h2 class="section-title">Feedback to the President of the Board</h2>
+      </div>
+      <div class="section-divider"></div>
+      <div class="scale-legend">Rating scale — (1) Strongly Disagree &nbsp;·&nbsp; (2) Disagree &nbsp;·&nbsp; (3) Neutral &nbsp;·&nbsp; (4) Agree &nbsp;·&nbsp; (5) Strongly Agree</div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">1.</span> The board has discussed the role and responsibilities of the President.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="d1" id="d1_1" value="1"><label for="d1_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d1" id="d1_2" value="2"><label for="d1_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d1" id="d1_3" value="3"><label for="d1_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="d1" id="d1_4" value="4"><label for="d1_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d1" id="d1_5" value="5"><label for="d1_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">2.</span> The President is well prepared for board meetings.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="d2" id="d2_1" value="1"><label for="d2_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d2" id="d2_2" value="2"><label for="d2_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d2" id="d2_3" value="3"><label for="d2_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="d2" id="d2_4" value="4"><label for="d2_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d2" id="d2_5" value="5"><label for="d2_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">3.</span> The President helps the board to stick to the agenda.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="d3" id="d3_1" value="1"><label for="d3_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d3" id="d3_2" value="2"><label for="d3_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d3" id="d3_3" value="3"><label for="d3_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="d3" id="d3_4" value="4"><label for="d3_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d3" id="d3_5" value="5"><label for="d3_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">4.</span> The President ensures that every board member has an opportunity to be heard.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="d4" id="d4_1" value="1"><label for="d4_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d4" id="d4_2" value="2"><label for="d4_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d4" id="d4_3" value="3"><label for="d4_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="d4" id="d4_4" value="4"><label for="d4_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d4" id="d4_5" value="5"><label for="d4_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">5.</span> The President is skilled at managing different points of view.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="d5" id="d5_1" value="1"><label for="d5_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d5" id="d5_2" value="2"><label for="d5_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d5" id="d5_3" value="3"><label for="d5_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="d5" id="d5_4" value="4"><label for="d5_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d5" id="d5_5" value="5"><label for="d5_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">6.</span> The President keeps the board focused on the matters it is considering and limits extraneous discussions.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="d6" id="d6_1" value="1"><label for="d6_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d6" id="d6_2" value="2"><label for="d6_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d6" id="d6_3" value="3"><label for="d6_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="d6" id="d6_4" value="4"><label for="d6_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d6" id="d6_5" value="5"><label for="d6_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">7.</span> The President knows how to be direct with an individual board member when their behavior needs to change.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="d7" id="d7_1" value="1"><label for="d7_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d7" id="d7_2" value="2"><label for="d7_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d7" id="d7_3" value="3"><label for="d7_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="d7" id="d7_4" value="4"><label for="d7_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d7" id="d7_5" value="5"><label for="d7_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">8.</span> The President helps the board work well together.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="d8" id="d8_1" value="1"><label for="d8_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d8" id="d8_2" value="2"><label for="d8_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d8" id="d8_3" value="3"><label for="d8_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="d8" id="d8_4" value="4"><label for="d8_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d8" id="d8_5" value="5"><label for="d8_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">9.</span> The President demonstrates good listening skills.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="d9" id="d9_1" value="1"><label for="d9_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d9" id="d9_2" value="2"><label for="d9_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d9" id="d9_3" value="3"><label for="d9_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="d9" id="d9_4" value="4"><label for="d9_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d9" id="d9_5" value="5"><label for="d9_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">10.</span> The board supports the President.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="d10" id="d10_1" value="1"><label for="d10_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d10" id="d10_2" value="2"><label for="d10_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d10" id="d10_3" value="3"><label for="d10_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="d10" id="d10_4" value="4"><label for="d10_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d10" id="d10_5" value="5"><label for="d10_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">11.</span> The President is effective in delegating responsibility amongst board members.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="d11" id="d11_1" value="1"><label for="d11_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d11" id="d11_2" value="2"><label for="d11_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d11" id="d11_3" value="3"><label for="d11_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="d11" id="d11_4" value="4"><label for="d11_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d11" id="d11_5" value="5"><label for="d11_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">12.</span> The President communicates in an effective, positive and timely manner with the board, committees, family members and the Pines Community.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="d12" id="d12_1" value="1"><label for="d12_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d12" id="d12_2" value="2"><label for="d12_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d12" id="d12_3" value="3"><label for="d12_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="d12" id="d12_4" value="4"><label for="d12_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d12" id="d12_5" value="5"><label for="d12_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block" data-required="rating">
+        <p class="question-text"><span class="question-num">13.</span> The President represents Pennock Pines, Inc. in an effective, positive and professional manner to the Pines Community.</p>
+        <div class="rating-row">
+          <div class="rating-option"><input type="radio" name="d13" id="d13_1" value="1"><label for="d13_1">1<span class="scale-word">Strongly Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d13" id="d13_2" value="2"><label for="d13_2">2<span class="scale-word">Disagree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d13" id="d13_3" value="3"><label for="d13_3">3<span class="scale-word">Neutral</span></label></div>
+          <div class="rating-option"><input type="radio" name="d13" id="d13_4" value="4"><label for="d13_4">4<span class="scale-word">Agree</span></label></div>
+          <div class="rating-option"><input type="radio" name="d13" id="d13_5" value="5"><label for="d13_5">5<span class="scale-word">Strongly Agree</span></label></div>
+        </div>
+        <p class="error-msg">Please select a rating.</p>
+      </div>
+
+      <div class="question-block">
+        <p class="question-text"><span class="question-num">14.</span> Provide one situation in which the President handled a situation on the Board well, and one situation where the President's performance could have been better.</p>
+        <textarea class="open-question" name="d14" placeholder="Your response…" style="min-height:120px;"></textarea>
+      </div>
+
+      <div class="question-block">
+        <p class="question-text"><span class="question-num">15.</span> Additional Comments:</p>
+        <textarea class="open-question" name="d15" placeholder="Your response…"></textarea>
+      </div>
+    </div>
+
+    <div class="submit-section">
+      <p class="submit-note">All responses are anonymous. Your submission will be collected by the Governance Committee.</p>
+      <button type="submit" class="submit-btn">Submit Assessment</button>
+    </div>
+
+  </form>
+
+  <div class="thankyou-screen" id="thankYou">
+    <div class="thankyou-icon">✓</div>
+    <h2 class="thankyou-title">Thank You</h2>
+    <p class="thankyou-text">Your assessment has been submitted. Your responses are anonymous and will be reviewed by the Governance Committee to help improve the performance of the Board.</p>
+  </div>
+
+</div>
+
+<script>
+  // Progress tracking
+  const ratingNames = [
+    'a1','a2','a3','a4','a5','a6',
+    'b1','b2','b3','b4','b5','b6','b7','b8','b9','b10','b11',
+    'c1','c2','c3','c4','c5','c6','c7','c8','c9','c10','c11','c12','c13',
+    'd1','d2','d3','d4','d5','d6','d7','d8','d9','d10','d11','d12','d13'
+  ];
+
+  function updateProgress() {
+    const answered = ratingNames.filter(n => document.querySelector(`input[name="${n}"]:checked`)).length;
+    const pct = Math.round((answered / ratingNames.length) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = pct + '% Complete';
+  }
+
+  document.querySelectorAll('input[type="radio"]').forEach(r => {
+    r.addEventListener('change', () => {
+      updateProgress();
+      // Remove error state on selection
+      r.closest('.question-block').classList.remove('error');
+    });
+  });
+
+  const SUPABASE_URL = 'https://pqgmnuwfgdbcondjphry.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_7-6RwgU8E3DhbxnDyYXtBg_7CDepUff';
+
+  // Form submission
+  document.getElementById('surveyForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    let valid = true;
+    let firstError = null;
+
+    document.querySelectorAll('.question-block[data-required="rating"]').forEach(block => {
+      const radios = block.querySelectorAll('input[type="radio"]');
+      const name = radios[0].name;
+      const checked = document.querySelector(`input[name="${name}"]:checked`);
+      if (!checked) {
+        block.classList.add('error');
+        valid = false;
+        if (!firstError) firstError = block;
+      } else {
+        block.classList.remove('error');
+      }
+    });
+
+    if (!valid) {
+      firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // Collect all responses
+    const ratingFields = [
+      'a1','a2','a3','a4','a5','a6',
+      'b1','b2','b3','b4','b5','b6','b7','b8','b9','b10','b11',
+      'c1','c2','c3','c4','c5','c6','c7','c8','c9','c10','c11','c12','c13',
+      'd1','d2','d3','d4','d5','d6','d7','d8','d9','d10','d11','d12','d13'
+    ];
+    const textFields = ['a7','a8','b12','b13','c14','c15','d14','d15'];
+
+    const payload = {};
+    ratingFields.forEach(f => {
+      const el = document.querySelector(`input[name="${f}"]:checked`);
+      payload[f] = el ? parseInt(el.value) : null;
+    });
+    textFields.forEach(f => {
+      const el = document.querySelector(`textarea[name="${f}"]`);
+      payload[f] = el ? el.value.trim() || null : null;
+    });
+
+    // Disable submit button
+    const btn = document.querySelector('.submit-btn');
+    btn.textContent = 'Submitting…';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/board_responses`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!res.ok) {
+        const err = await res.text();
+        throw new Error(err);
+      }
+
+      // Show thank you
+      document.getElementById('surveyForm').style.display = 'none';
+      document.getElementById('thankYou').style.display = 'block';
+      document.getElementById('progressFill').style.width = '100%';
+      document.getElementById('progressLabel').textContent = '100% Complete';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    } catch (err) {
+      console.error('Submission error:', err);
+      btn.textContent = 'Submit Assessment';
+      btn.disabled = false;
+      alert('There was a problem submitting your response. Please try again.');
+    }
+  });
+
+  updateProgress();
+</script>
+</body>
+</html>

@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pennock Pines — Board Assessment Results</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: #f7f9f7;
+    color: #111111;
+    min-height: 100vh;
+  }
+
+  /* Login screen */
+  .login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1c2e1e;
+  }
+  .login-card {
+    background: #ffffff;
+    padding: 48px 40px;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+  }
+  .login-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #b8933a;
+    margin-bottom: 10px;
+  }
+  .login-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: #1c2e1e;
+    margin-bottom: 32px;
+  }
+  .login-input {
+    width: 100%;
+    padding: 12px 16px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 15px;
+    border: 1.5px solid #aac4aa;
+    outline: none;
+    margin-bottom: 14px;
+    color: #111;
+    letter-spacing: 0.1em;
+  }
+  .login-input:focus { border-color: #2d4a30; }
+  .login-btn {
+    width: 100%;
+    padding: 13px;
+    background: #1c2e1e;
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .login-btn:hover { background: #2d4a30; }
+  .login-error {
+    font-size: 13px;
+    color: #c0392b;
+    margin-top: 10px;
+    display: none;
+  }
+
+  /* Dashboard */
+  .dashboard { display: none; }
+
+  .site-header {
+    background: #1c2e1e;
+    padding: 0;
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 36px 32px 30px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .header-left .org-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #d4aa55;
+    margin-bottom: 6px;
+  }
+  .header-left h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 3vw, 28px);
+    color: #ffffff;
+    font-weight: 600;
+  }
+  .header-meta {
+    font-size: 13px;
+    color: #c8d8c4;
+    text-align: right;
+  }
+  .header-meta span {
+    display: block;
+    margin-bottom: 4px;
+  }
+  .refresh-btn {
+    background: transparent;
+    border: 1px solid #5a7a5c;
+    color: #c8d8c4;
+    padding: 6px 14px;
+    font-family: 'Source Serif 4', serif;
+    font-size: 12px;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+    margin-top: 6px;
+  }
+  .refresh-btn:hover { background: rgba(255,255,255,0.08); border-color: #c8d8c4; }
+
+  .dash-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+  }
+
+  /* Summary cards */
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .summary-card {
+    background: #ffffff;
+    border: 1px solid #dde8dd;
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .summary-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 600;
+    color: #1c2e1e;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .summary-label {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #555;
+  }
+
+  /* Section panels */
+  .section-panel {
+    background: #ffffff;
+    border: 1px solid #dde8dd;
+    margin-bottom: 28px;
+  }
+  .panel-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 24px;
+    border-bottom: 1px solid #dde8dd;
+    cursor: pointer;
+    user-select: none;
+  }
+  .panel-header:hover { background: #f9faf9; }
+  .panel-letter {
+    width: 36px;
+    height: 36px;
+    background: #1c2e1e;
+    color: #d4aa55;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .panel-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    color: #1c2e1e;
+    flex: 1;
+  }
+  .panel-avg {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #2d4a30;
+  }
+  .panel-avg-label {
+    font-size: 11px;
+    color: #777;
+    text-align: right;
+  }
+  .panel-chevron {
+    font-size: 12px;
+    color: #777;
+    margin-left: 8px;
+    transition: transform 0.2s;
+  }
+  .panel-header.open .panel-chevron { transform: rotate(180deg); }
+
+  .panel-body {
+    display: none;
+    padding: 24px;
+  }
+  .panel-body.open { display: block; }
+
+  /* Question rows */
+  .q-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f5f0;
+  }
+  .q-row:last-of-type { border-bottom: none; }
+  .q-text {
+    font-size: 13.5px;
+    color: #111;
+    line-height: 1.5;
+  }
+  .q-score-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 120px;
+    justify-content: flex-end;
+  }
+  .q-bar-track {
+    width: 80px;
+    height: 6px;
+    background: #dde8dd;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .q-bar-fill {
+    height: 100%;
+    background: #2d4a30;
+    border-radius: 3px;
+    transition: width 0.6s ease;
+  }
+  .q-score {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: #1c2e1e;
+    min-width: 32px;
+    text-align: right;
+  }
+
+  /* Chart */
+  .chart-wrap {
+    margin: 28px 0 8px;
+    height: 260px;
+    position: relative;
+  }
+
+  /* Open text */
+  .open-text-section {
+    margin-top: 16px;
+  }
+  .open-text-label {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #777;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #dde8dd;
+  }
+  .open-text-q {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1c2e1e;
+    margin: 14px 0 6px;
+  }
+  .response-item {
+    background: #f9faf9;
+    border-left: 2px solid #aac4aa;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #111;
+  }
+  .no-responses {
+    font-size: 13px;
+    color: #999;
+    font-style: italic;
+  }
+
+  /* Loading */
+  .loading {
+    text-align: center;
+    padding: 60px 20px;
+    color: #777;
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) {
+    .header-inner { flex-direction: column; align-items: flex-start; }
+    .header-meta { text-align: left; }
+    .q-row { grid-template-columns: 1fr; }
+    .q-score-wrap { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Login -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">Pennock Pines, Inc.</div>
+    <h2 class="login-title">Assessment Results</h2>
+    <input type="password" class="login-input" id="passwordInput" placeholder="Enter password" />
+    <button class="login-btn" onclick="checkPassword()">View Results</button>
+    <p class="login-error" id="loginError">Incorrect password. Please try again.</p>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div class="dashboard" id="dashboard">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <div class="org-name">Pennock Pines, Inc.</div>
+        <h1>Board Assessment Results 2026</h1>
+      </div>
+      <div class="header-meta">
+        <span id="lastUpdated">Loading…</span>
+        <button class="refresh-btn" onclick="loadData()">↻ Refresh</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="dash-wrap">
+    <div id="loadingMsg" class="loading">Loading responses…</div>
+    <div id="dashContent" style="display:none">
+
+      <!-- Summary cards -->
+      <div class="summary-row">
+        <div class="summary-card">
+          <div class="summary-num" id="totalResponses">—</div>
+          <div class="summary-label">Total Responses</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-num" id="overallAvg">—</div>
+          <div class="summary-label">Overall Average</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-num" id="highestSection">—</div>
+          <div class="summary-label">Highest Section</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-num" id="lowestSection">—</div>
+          <div class="summary-label">Needs Attention</div>
+        </div>
+      </div>
+
+      <!-- Section overview chart -->
+      <div class="section-panel">
+        <div class="panel-header open" onclick="togglePanel(this)">
+          <div class="panel-title" style="font-size:19px;">Section Overview</div>
+          <span class="panel-chevron">▼</span>
+        </div>
+        <div class="panel-body open">
+          <div class="chart-wrap">
+            <canvas id="overviewChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section A -->
+      <div class="section-panel">
+        <div class="panel-header" onclick="togglePanel(this)">
+          <div class="panel-letter">A</div>
+          <div class="panel-title">How Well Has the Board Done Its Job?</div>
+          <div>
+            <div class="panel-avg" id="avgA">—</div>
+            <div class="panel-avg-label">avg / 5</div>
+          </div>
+          <span class="panel-chevron">▼</span>
+        </div>
+        <div class="panel-body" id="bodyA"></div>
+      </div>
+
+      <!-- Section B -->
+      <div class="section-panel">
+        <div class="panel-header" onclick="togglePanel(this)">
+          <div class="panel-letter">B</div>
+          <div class="panel-title">How Well Has the Board Conducted Itself?</div>
+          <div>
+            <div class="panel-avg" id="avgB">—</div>
+            <div class="panel-avg-label">avg / 5</div>
+          </div>
+          <span class="panel-chevron">▼</span>
+        </div>
+        <div class="panel-body" id="bodyB"></div>
+      </div>
+
+      <!-- Section C -->
+      <div class="section-panel">
+        <div class="panel-header" onclick="togglePanel(this)">
+          <div class="panel-letter">C</div>
+          <div class="panel-title">Performance of Individual Board Members</div>
+          <div>
+            <div class="panel-avg" id="avgC">—</div>
+            <div class="panel-avg-label">avg / 5</div>
+          </div>
+          <span class="panel-chevron">▼</span>
+        </div>
+        <div class="panel-body" id="bodyC"></div>
+      </div>
+
+      <!-- Section D -->
+      <div class="section-panel">
+        <div class="panel-header" onclick="togglePanel(this)">
+          <div class="panel-letter">D</div>
+          <div class="panel-title">Feedback to the President of the Board</div>
+          <div>
+            <div class="panel-avg" id="avgD">—</div>
+            <div class="panel-avg-label">avg / 5</div>
+          </div>
+          <span class="panel-chevron">▼</span>
+        </div>
+        <div class="panel-body" id="bodyD"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const SUPABASE_URL = 'https://pqgmnuwfgdbcondjphry.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_7-6RwgU8E3DhbxnDyYXtBg_7CDepUff';
+  const DASHBOARD_PASSWORD = 'PennockPines2026';
+
+  const SECTIONS = {
+    A: {
+      ratings: [
+        { key: 'a1', text: 'Our organization has a three to five-year strategic plan.' },
+        { key: 'a2', text: 'The board\'s meeting agendas clearly reflect our strategic plan.' },
+        { key: 'a3', text: 'Our organization has a one-year operational plan.' },
+        { key: 'a4', text: 'The board provides direction on how to achieve the goals.' },
+        { key: 'a5', text: 'The board ensures that accomplishments and challenges are communicated to family members.' },
+        { key: 'a6', text: 'The board ensures family members have received reports on how resources have been used.' },
+      ],
+      texts: [
+        { key: 'a7', text: 'If you could do one thing to improve the performance of the board, what would it be?' },
+        { key: 'a8', text: 'Additional Comments' },
+      ]
+    },
+    B: {
+      ratings: [
+        { key: 'b1', text: 'Directors are aware of what is expected of them.' },
+        { key: 'b2', text: 'The agenda of each board meeting is well planned.' },
+        { key: 'b3', text: 'Directors receive agendas and written reports sufficiently in advance.' },
+        { key: 'b4', text: 'Directors come to meetings prepared.' },
+        { key: 'b5', text: 'All directors participate in important board discussions.' },
+        { key: 'b6', text: 'We do a good job encouraging and dealing with different points of view.' },
+        { key: 'b7', text: 'We all support the decisions we make.' },
+        { key: 'b8', text: 'The board has taken responsibility for recruiting new directors and officers.' },
+        { key: 'b9', text: 'The board has planned and led the orientation process for new directors and officers.' },
+        { key: 'b10', text: 'The board has a plan for director and officer education and further board development.' },
+        { key: 'b11', text: 'Board meetings are focused on important decisions, leaving extraneous matters to committees.' },
+      ],
+      texts: [
+        { key: 'b12', text: 'Biggest challenge in your role and one change to address it.' },
+        { key: 'b13', text: 'Additional Comments' },
+      ]
+    },
+    C: {
+      ratings: [
+        { key: 'c1', text: 'I am aware of what is expected of me as a board member.' },
+        { key: 'c2', text: 'I have adequate time to read materials in advance of board meetings.' },
+        { key: 'c3', text: 'I am familiar with Pennock Pines, Inc.\'s by-laws and governing practices.' },
+        { key: 'c4', text: 'I frequently encourage other board members to express their opinions.' },
+        { key: 'c5', text: 'I am encouraged by other board members to express my opinions.' },
+        { key: 'c6', text: 'I am a good listener at board meetings.' },
+        { key: 'c7', text: 'I follow through on things I have committed to doing.' },
+        { key: 'c8', text: 'I maintain the confidentiality of all board discussions.' },
+        { key: 'c9', text: 'I reach out to other family members to get their thoughts on major issues.' },
+        { key: 'c10', text: 'When I have a different opinion than the majority, I raise it.' },
+        { key: 'c11', text: 'I support board decisions once they are made even if I do not agree with them.' },
+        { key: 'c12', text: 'I positively promote the work of Pennock Pines, Inc. in the Pines Community.' },
+        { key: 'c13', text: 'I follow through on concerns and issues brought to my attention by family members.' },
+      ],
+      texts: [
+        { key: 'c14', text: 'First thing that comes to mind about your experience as a board member (one positive/one negative).' },
+        { key: 'c15', text: 'Additional Comments' },
+      ]
+    },
+    D: {
+      ratings: [
+        { key: 'd1', text: 'The board has discussed the role and responsibilities of the President.' },
+        { key: 'd2', text: 'The President is well prepared for board meetings.' },
+        { key: 'd3', text: 'The President helps the board to stick to the agenda.' },
+        { key: 'd4', text: 'The President ensures that every board member has an opportunity to be heard.' },
+        { key: 'd5', text: 'The President is skilled at managing different points of view.' },
+        { key: 'd6', text: 'The President keeps the board focused and limits extraneous discussions.' },
+        { key: 'd7', text: 'The President knows how to be direct when a board member\'s behavior needs to change.' },
+        { key: 'd8', text: 'The President helps the board work well together.' },
+        { key: 'd9', text: 'The President demonstrates good listening skills.' },
+        { key: 'd10', text: 'The board supports the President.' },
+        { key: 'd11', text: 'The President is effective in delegating responsibility amongst board members.' },
+        { key: 'd12', text: 'The President communicates in an effective, positive and timely manner.' },
+        { key: 'd13', text: 'The President represents Pennock Pines, Inc. in an effective and professional manner.' },
+      ],
+      texts: [
+        { key: 'd14', text: 'One situation the President handled well and one that could have been better.' },
+        { key: 'd15', text: 'Additional Comments' },
+      ]
+    }
+  };
+
+  function checkPassword() {
+    const val = document.getElementById('passwordInput').value;
+    if (val === DASHBOARD_PASSWORD) {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      loadData();
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+    }
+  }
+
+  document.getElementById('passwordInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') checkPassword();
+  });
+
+  let overviewChart = null;
+
+  function avg(rows, key) {
+    const vals = rows.map(r => r[key]).filter(v => v !== null && v !== undefined);
+    if (!vals.length) return null;
+    return vals.reduce((a, b) => a + b, 0) / vals.length;
+  }
+
+  function sectionAvg(rows, section) {
+    const keys = SECTIONS[section].ratings.map(q => q.key);
+    const all = [];
+    rows.forEach(r => keys.forEach(k => { if (r[k] !== null && r[k] !== undefined) all.push(r[k]); }));
+    if (!all.length) return null;
+    return all.reduce((a, b) => a + b, 0) / all.length;
+  }
+
+  function renderSection(sectionKey, rows) {
+    const section = SECTIONS[sectionKey];
+    const body = document.getElementById(`body${sectionKey}`);
+
+    let html = '';
+
+    // Rating questions
+    section.ratings.forEach((q, i) => {
+      const a = avg(rows, q.key);
+      const pct = a ? (a / 5) * 100 : 0;
+      html += `
+        <div class="q-row">
+          <div class="q-text"><strong>${i + 1}.</strong> ${q.text}</div>
+          <div class="q-score-wrap">
+            <div class="q-bar-track"><div class="q-bar-fill" style="width:${pct}%"></div></div>
+            <div class="q-score">${a ? a.toFixed(2) : '—'}</div>
+          </div>
+        </div>`;
+    });
+
+    // Open text responses
+    html += `<div class="open-text-section"><div class="open-text-label">Open-ended Responses</div>`;
+    section.texts.forEach(q => {
+      const responses = rows.map(r => r[q.key]).filter(v => v && v.trim());
+      html += `<div class="open-text-q">${q.text}</div>`;
+      if (responses.length) {
+        responses.forEach(r => { html += `<div class="response-item">${escapeHtml(r)}</div>`; });
+      } else {
+        html += `<div class="no-responses">No responses yet.</div>`;
+      }
+    });
+    html += `</div>`;
+
+    body.innerHTML = html;
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function togglePanel(header) {
+    header.classList.toggle('open');
+    const body = header.nextElementSibling;
+    body.classList.toggle('open');
+  }
+
+  async function loadData() {
+    document.getElementById('loadingMsg').style.display = 'block';
+    document.getElementById('dashContent').style.display = 'none';
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/board_responses?select=*&order=submitted_at.desc`, {
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`
+        }
+      });
+
+      if (!res.ok) throw new Error(await res.text());
+      const rows = await res.json();
+
+      // Summary
+      document.getElementById('totalResponses').textContent = rows.length;
+
+      const secAvgs = {
+        A: sectionAvg(rows, 'A'),
+        B: sectionAvg(rows, 'B'),
+        C: sectionAvg(rows, 'C'),
+        D: sectionAvg(rows, 'D'),
+      };
+
+      const allAvgs = Object.values(secAvgs).filter(v => v !== null);
+      const overall = allAvgs.length ? (allAvgs.reduce((a,b) => a+b,0) / allAvgs.length) : null;
+      document.getElementById('overallAvg').textContent = overall ? overall.toFixed(2) : '—';
+
+      const secLabels = { A: 'Section A', B: 'Section B', C: 'Section C', D: 'Section D' };
+      const sorted = Object.entries(secAvgs).filter(([,v]) => v !== null).sort((a,b) => b[1]-a[1]);
+      document.getElementById('highestSection').textContent = sorted.length ? secLabels[sorted[0][0]] : '—';
+      document.getElementById('lowestSection').textContent = sorted.length ? secLabels[sorted[sorted.length-1][0]] : '—';
+
+      // Section averages
+      ['A','B','C','D'].forEach(s => {
+        const el = document.getElementById(`avg${s}`);
+        if (el) el.textContent = secAvgs[s] ? secAvgs[s].toFixed(2) : '—';
+      });
+
+      // Overview chart
+      if (overviewChart) overviewChart.destroy();
+      const ctx = document.getElementById('overviewChart').getContext('2d');
+      overviewChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: [
+            'A: Board Job Performance',
+            'B: Board Conduct',
+            'C: Individual Members',
+            'D: President Evaluation'
+          ],
+          datasets: [{
+            label: 'Average Score',
+            data: ['A','B','C','D'].map(s => secAvgs[s] ? parseFloat(secAvgs[s].toFixed(2)) : 0),
+            backgroundColor: ['#2d4a30','#3d6040','#4d7850','#5d9060'],
+            borderWidth: 0,
+            borderRadius: 2,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              min: 0, max: 5,
+              ticks: { stepSize: 1, font: { family: 'Source Serif 4' } },
+              grid: { color: '#eee' }
+            },
+            x: {
+              ticks: { font: { family: 'Source Serif 4', size: 12 } },
+              grid: { display: false }
+            }
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: ctx => ` Avg: ${ctx.parsed.y.toFixed(2)} / 5`
+              }
+            }
+          }
+        }
+      });
+
+      // Render sections
+      ['A','B','C','D'].forEach(s => renderSection(s, rows));
+
+      // Last updated
+      const now = new Date();
+      document.getElementById('lastUpdated').textContent = `Last updated: ${now.toLocaleTimeString()}`;
+
+      document.getElementById('loadingMsg').style.display = 'none';
+      document.getElementById('dashContent').style.display = 'block';
+
+    } catch (err) {
+      console.error(err);
+      document.getElementById('loadingMsg').textContent = 'Error loading data. Please refresh and try again.';
+    }
+  }
+</script>
+</body>
+</html>
