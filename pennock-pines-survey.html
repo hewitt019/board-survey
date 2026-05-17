@@ -469,33 +469,24 @@
     var val = document.getElementById('accessInput').value.trim().toLowerCase();
     if (val === 'buttonwood') {
       sessionStorage.setItem('pp_unlocked', '1');
-      var screen = document.getElementById('accessScreen');
-      if (screen) screen.remove();
+      document.getElementById('accessScreen').style.display = 'none';
     } else {
       document.getElementById('accessError').style.display = 'block';
       document.getElementById('accessInput').value = '';
-      document.getElementById('accessInput').focus();
     }
   }
 
-  // Auto-unlock if already unlocked in this session
-  (function() {
+  window.onload = function() {
     if (sessionStorage.getItem('pp_unlocked') === '1') {
-      document.addEventListener('DOMContentLoaded', function() {
-        var screen = document.getElementById('accessScreen');
-        if (screen) screen.remove();
-      });
+      document.getElementById('accessScreen').style.display = 'none';
     }
-  })();
-
-  document.addEventListener('DOMContentLoaded', function() {
     var input = document.getElementById('accessInput');
     if (input) {
       input.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') checkAccess();
       });
     }
-  });
+  };
 </script>
 </head>
 <body>
