@@ -467,6 +467,7 @@
   function checkAccess() {
     const val = document.getElementById('accessInput').value.trim().toLowerCase();
     if (val === 'buttonwood') {
+      sessionStorage.setItem('pp_unlocked', '1');
       var screen = document.getElementById('accessScreen');
       if (screen) screen.remove();
     } else {
@@ -475,6 +476,16 @@
       document.getElementById('accessInput').focus();
     }
   }
+
+  // Auto-unlock if already unlocked in this session
+  (function() {
+    if (sessionStorage.getItem('pp_unlocked') === '1') {
+      document.addEventListener('DOMContentLoaded', function() {
+        var screen = document.getElementById('accessScreen');
+        if (screen) screen.remove();
+      });
+    }
+  })();
 </script>
 </head>
 <body>
