@@ -1112,7 +1112,7 @@
 
     <div class="submit-section">
       <p class="submit-note">All responses are anonymous. Your submission will be collected by the Governance Committee.</p>
-      <button type="submit" class="submit-btn">Submit Assessment</button>
+      <button type="button" class="submit-btn" id="submitBtn" onclick="handleSubmit()">Submit Assessment</button>
     </div>
 
   </form>
@@ -1198,8 +1198,7 @@
   });
 
   // Form submission
-  document.getElementById('surveyForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
+  async function handleSubmit() {
     let valid = true;
     let firstError = null;
 
@@ -1237,7 +1236,7 @@
     });
     textFields.forEach(f => {
       const elText = document.querySelector(`textarea[name="${f}"]`);
-      payload[f] = elText ? el.value.trim() || null : null;
+      payload[f] = elText ? elText.value.trim() || null : null;
     });
 
     // Disable submit button
