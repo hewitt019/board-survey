@@ -463,30 +463,7 @@
   }
 
 </style>
-<script>
-  function checkAccess() {
-    const val = document.getElementById('accessInput').value.trim().toLowerCase();
-    if (val === 'buttonwood') {
-      sessionStorage.setItem('pp_unlocked', '1');
-      var screen = document.getElementById('accessScreen');
-      if (screen) screen.remove();
-    } else {
-      document.getElementById('accessError').style.display = 'block';
-      document.getElementById('accessInput').value = '';
-      document.getElementById('accessInput').focus();
-    }
-  }
 
-  // Auto-unlock if already unlocked in this session
-  (function() {
-    if (sessionStorage.getItem('pp_unlocked') === '1') {
-      document.addEventListener('DOMContentLoaded', function() {
-        var screen = document.getElementById('accessScreen');
-        if (screen) screen.remove();
-      });
-    }
-  })();
-</script>
 </head>
 <body>
 
@@ -506,14 +483,7 @@
     </div>
   </div>
 </div>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var input = document.getElementById('accessInput');
-    if (input) input.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') checkAccess();
-    });
-  });
-</script>
+
 
 <header class="site-header">
   <div class="header-inner">
@@ -1173,8 +1143,6 @@
       // Silent fail — just a wake-up ping
     }
   }
-  wakeUpDatabase();
-
   // Progress tracking
   const ratingNames = [
     'a1','a2','a3','a4','a5','a6',
@@ -1197,9 +1165,6 @@
       r.closest('.question-block').classList.remove('error');
     });
   });
-
-  const SUPABASE_URL = 'https://pqgmnuwfgdbcondjphry.supabase.co';
-  const SUPABASE_KEY = 'sb_publishable_7-6RwgU8E3DhbxnDyYXtBg_7CDepUff';
 
   // Form submission
   document.getElementById('surveyForm').addEventListener('submit', async function(e) {
@@ -1240,8 +1205,8 @@
       payload[f] = el ? parseInt(el.value) : null;
     });
     textFields.forEach(f => {
-      const el = document.querySelector(`textarea[name="${f}"]`);
-      payload[f] = el ? el.value.trim() || null : null;
+      const elText = document.querySelector(`textarea[name="${f}"]`);
+      payload[f] = elText ? el.value.trim() || null : null;
     });
 
     // Disable submit button
